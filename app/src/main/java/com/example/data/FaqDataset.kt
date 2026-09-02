@@ -1,0 +1,230 @@
+package com.example.data
+
+import com.example.model.FaqItem
+
+object FaqDataset {
+
+    val SAMPLE_QUESTIONS = listOf(
+        "How do I reset my password?",
+        "What are the API rate limits and quotas?",
+        "What pricing plans are available?",
+        "How does TF-IDF and Cosine Similarity work?",
+        "Is customer data used to train AI models?",
+        "Can I get a refund on subscription?",
+        "Does the platform support Two-Factor Authentication (2FA)?",
+        "What payment methods do you accept?"
+    )
+
+    val ALL_FAQS = listOf(
+        FaqItem(
+            id = 1,
+            category = "General",
+            question = "What is this AI platform and how does it work?",
+            answer = "Our AI platform is a cloud-native developer suite that provides cutting-edge Natural Language Processing (NLP), Large Language Model (LLM) orchestration, and intelligent APIs for building automated conversational agents, document analyzers, and predictive systems.",
+            tags = listOf("overview", "introduction", "platform", "features")
+        ),
+        FaqItem(
+            id = 2,
+            category = "General",
+            question = "How do I create a new account or sign up?",
+            answer = "You can create an account by clicking the 'Sign Up' button on the homepage. Enter your work email, set a secure password, verify your email address via the activation link sent to your inbox, and you will receive instant access to our sandbox environment.",
+            tags = listOf("signup", "account", "register", "join")
+        ),
+        FaqItem(
+            id = 3,
+            category = "General",
+            question = "Is there a free trial available?",
+            answer = "Yes! All newly registered accounts automatically receive a 14-day free trial with $50 in complimentary platform API credits to test our NLP models, chatbots, and document processing endpoints.",
+            tags = listOf("trial", "free", "credits", "test")
+        ),
+        FaqItem(
+            id = 4,
+            category = "Authentication",
+            question = "How do I reset my account password?",
+            answer = "To reset your password, click 'Forgot Password' on the login screen, enter your registered email address, and follow the password reset link sent to your email to create a new secure password.",
+            tags = listOf("password", "reset", "forgot", "login", "auth")
+        ),
+        FaqItem(
+            id = 5,
+            category = "Authentication",
+            question = "Does the platform support Two-Factor Authentication (2FA)?",
+            answer = "Yes, Two-Factor Authentication (2FA) is supported and strongly recommended. You can enable it under Account Settings > Security using any TOTP authenticator app like Google Authenticator, Authy, or 1Password.",
+            tags = listOf("2fa", "security", "mfa", "authenticator", "two-factor")
+        ),
+        FaqItem(
+            id = 6,
+            category = "Authentication",
+            question = "Can I use Single Sign-On (SSO) with Google or GitHub?",
+            answer = "Yes, we support one-click OAuth Single Sign-On (SSO) with Google, GitHub, and Microsoft accounts. Enterprise customers can also configure SAML 2.0 and Okta integration.",
+            tags = listOf("sso", "google", "github", "oauth", "saml")
+        ),
+        FaqItem(
+            id = 7,
+            category = "API & Integration",
+            question = "Where can I find and generate my API keys?",
+            answer = "API keys can be generated from the Developer Dashboard under Settings > API Keys. Always keep your API keys confidential and avoid committing them to public git repositories.",
+            tags = listOf("api", "keys", "token", "developer", "access")
+        ),
+        FaqItem(
+            id = 8,
+            category = "API & Integration",
+            question = "What SDKs and programming languages are supported?",
+            answer = "We provide official client SDKs for Python, JavaScript/TypeScript (Node.js), Java/Kotlin, Go, and cURL REST endpoints with OpenAPI 3.0 specifications.",
+            tags = listOf("sdk", "python", "javascript", "typescript", "java", "languages")
+        ),
+        FaqItem(
+            id = 9,
+            category = "API & Integration",
+            question = "What are the default API rate limits and quotas?",
+            answer = "Free tier accounts are limited to 60 requests per minute (RPM) and 10,000 tokens per minute. Pro and Enterprise plans offer scalable limits up to 10,000 RPM with custom dedicated capacity options.",
+            tags = listOf("rate limit", "quota", "rpm", "tpm", "throttle")
+        ),
+        FaqItem(
+            id = 10,
+            category = "API & Integration",
+            question = "How do I handle HTTP 429 Too Many Requests errors?",
+            answer = "HTTP 429 indicates that your requests exceeded the rate limits. We recommend implementing exponential backoff with jitter in your client code, or upgrading your billing tier for increased throughput.",
+            tags = listOf("error", "429", "rate limit", "backoff", "status")
+        ),
+        FaqItem(
+            id = 11,
+            category = "Billing & Pricing",
+            question = "What pricing plans and subscription tiers are offered?",
+            answer = "We offer three pricing tiers: Developer (Free / Pay-as-you-go), Professional ($49/month with higher rate limits and priority support), and Enterprise (custom pricing, SLA, VPC deployment, and dedicated GPUs).",
+            tags = listOf("pricing", "plans", "subscription", "cost", "tiers")
+        ),
+        FaqItem(
+            id = 12,
+            category = "Billing & Pricing",
+            question = "What payment methods are accepted?",
+            answer = "We accept all major credit and debit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, Google Pay, and ACH wire transfers or invoicing for Enterprise agreements.",
+            tags = listOf("payment", "credit card", "billing", "paypal", "invoice")
+        ),
+        FaqItem(
+            id = 13,
+            category = "Billing & Pricing",
+            question = "How can I cancel or downgrade my subscription?",
+            answer = "You can manage, cancel, or downgrade your plan at any time from Dashboard > Billing > Manage Subscription. Your plan benefits will remain active until the end of the current billing cycle.",
+            tags = listOf("cancel", "downgrade", "subscription", "refund", "billing")
+        ),
+        FaqItem(
+            id = 14,
+            category = "Billing & Pricing",
+            question = "Can I get a refund if I am dissatisfied with the service?",
+            answer = "We offer a 30-day money-back guarantee for unused monthly subscription balances. Please submit a refund request to billing@codealpha-ai.com with your transaction ID.",
+            tags = listOf("refund", "money back", "guarantee", "billing")
+        ),
+        FaqItem(
+            id = 15,
+            category = "AI Models & Features",
+            question = "What AI and NLP capabilities are included in the chatbot?",
+            answer = "The chatbot features Natural Language Processing (NLP) tokenization, text normalization, stopword filtering, lemmatization/stemming, Term Frequency-Inverse Document Frequency (TF-IDF) vector representation, and Cosine Similarity matching.",
+            tags = listOf("nlp", "tfidf", "cosine similarity", "features", "algorithm")
+        ),
+        FaqItem(
+            id = 16,
+            category = "AI Models & Features",
+            question = "How does TF-IDF vectorization work in this chatbot?",
+            answer = "TF-IDF (Term Frequency-Inverse Document Frequency) measures how important a word is to a document in a corpus. Term Frequency (TF) counts word occurrences in a query, while Inverse Document Frequency (IDF) penalizes common words and emphasizes unique, informative keywords.",
+            tags = listOf("tfidf", "nlp", "vector", "term frequency", "idf")
+        ),
+        FaqItem(
+            id = 17,
+            category = "AI Models & Features",
+            question = "How is Cosine Similarity calculated between query and FAQ vectors?",
+            answer = "Cosine similarity computes the cosine of the angle between two normalized numerical vectors: cos(θ) = (A · B) / (||A|| ||B||). Scores range from 0.0 (completely dissimilar) to 1.0 (identical semantic vector alignment).",
+            tags = listOf("cosine similarity", "math", "vector", "similarity", "angle")
+        ),
+        FaqItem(
+            id = 18,
+            category = "AI Models & Features",
+            question = "Can I train or fine-tune models with custom datasets?",
+            answer = "Yes! You can upload your own custom FAQ datasets in JSON or CSV format. The TF-IDF vectorizer dynamically recalibrates vocabulary matrices and inverse frequencies instantly without heavy GPU retraining.",
+            tags = listOf("dataset", "custom", "fine-tuning", "upload", "training")
+        ),
+        FaqItem(
+            id = 19,
+            category = "AI Models & Features",
+            question = "What is the similarity threshold and how can I adjust it?",
+            answer = "The similarity threshold is the minimum cosine score (e.g., 0.20 - 0.35) required to return a matching answer. If no FAQ exceeds the threshold, the system triggers a friendly fallback response. You can configure this threshold in code or through the UI slider.",
+            tags = listOf("threshold", "confidence", "fallback", "tuning", "score")
+        ),
+        FaqItem(
+            id = 20,
+            category = "Security & Compliance",
+            question = "Is user data used to train public machine learning models?",
+            answer = "No. We adhere to a strict zero-data-retention policy for model training. Your proprietary queries, FAQ documents, and customer chat histories are never utilized to train public foundation models.",
+            tags = listOf("privacy", "data", "training", "gdpr", "compliance")
+        ),
+        FaqItem(
+            id = 21,
+            category = "Security & Compliance",
+            question = "Is the platform GDPR and HIPAA compliant?",
+            answer = "Yes, our architecture complies with GDPR, CCPA, SOC 2 Type II, and offers HIPAA Business Associate Agreements (BAAs) for healthcare enterprise customers.",
+            tags = listOf("gdpr", "hipaa", "soc2", "compliance", "security")
+        ),
+        FaqItem(
+            id = 22,
+            category = "Security & Compliance",
+            question = "Where is customer data hosted and stored?",
+            answer = "Data is hosted in secure, ISO-27001 certified AWS and Google Cloud data centers. Enterprise customers can choose specific geographic data residency regions in the US, EU, UK, or Asia-Pacific.",
+            tags = listOf("data residency", "hosting", "cloud", "aws", "gcp")
+        ),
+        FaqItem(
+            id = 23,
+            category = "Security & Compliance",
+            question = "How is data encrypted in transit and at rest?",
+            answer = "All network communication is encrypted in transit using TLS 1.3 with forward secrecy. Stored data is encrypted at rest using industry-standard AES-256 with automated key rotation.",
+            tags = listOf("encryption", "tls", "aes256", "security", "crypto")
+        ),
+        FaqItem(
+            id = 24,
+            category = "Support & Troubleshooting",
+            question = "How can I contact customer support or submit a ticket?",
+            answer = "You can reach our dedicated support engineering team 24/7 via email at support@codealpha-ai.com, through the in-app chat widget, or by submitting a ticket at support.codealpha-ai.com.",
+            tags = listOf("support", "help", "ticket", "contact", "email")
+        ),
+        FaqItem(
+            id = 25,
+            category = "Support & Troubleshooting",
+            question = "What is the platform uptime Service Level Agreement (SLA)?",
+            answer = "We maintain a guaranteed 99.9% uptime SLA for Pro users and 99.99% high-availability multi-region redundancy for Enterprise deployments with real-time status updates at status.codealpha-ai.com.",
+            tags = listOf("uptime", "sla", "availability", "status", "reliability")
+        ),
+        FaqItem(
+            id = 26,
+            category = "Support & Troubleshooting",
+            question = "What should I do if the chatbot gives an incorrect or irrelevant answer?",
+            answer = "If an answer does not match your intent, try rephrasing with specific keywords. Administrators can also add new FAQ variations or adjust the cosine similarity threshold to fine-tune matching sensitivity.",
+            tags = listOf("troubleshoot", "incorrect", "rephrase", "tuning", "fix")
+        ),
+        FaqItem(
+            id = 27,
+            category = "Developer Tools",
+            question = "Can I integrate this FAQ chatbot into Slack, Discord, or Teams?",
+            answer = "Yes, we provide ready-to-deploy webhooks and bot integration templates for Slack Apps, Discord Bots, Microsoft Teams, and standard website JavaScript widgets.",
+            tags = listOf("slack", "discord", "teams", "webhook", "integration")
+        ),
+        FaqItem(
+            id = 28,
+            category = "Developer Tools",
+            question = "Does the chatbot require an active internet connection or paid API key to run locally?",
+            answer = "No. This CodeAlpha FAQ Chatbot is completely self-contained! It runs locally using Python, NLTK, and scikit-learn without requiring any paid third-party API keys or external server dependencies.",
+            tags = listOf("offline", "local", "no-api-key", "free", "scikit-learn")
+        ),
+        FaqItem(
+            id = 29,
+            category = "Developer Tools",
+            question = "How do I export conversation logs and chat analytics?",
+            answer = "You can export conversation transcripts and similarity metrics directly from the Admin Dashboard in JSON or CSV format, or query analytics programmatically via our /api/analytics endpoint.",
+            tags = listOf("export", "logs", "analytics", "csv", "json")
+        ),
+        FaqItem(
+            id = 30,
+            category = "Developer Tools",
+            question = "How can I deploy this Python Flask chatbot to production?",
+            answer = "You can deploy this project using Docker, Gunicorn on Linux VPS (Ubuntu/Debian), or cloud platforms like Render, Heroku, AWS Elastic Beanstalk, and Google Cloud Run.",
+            tags = listOf("deployment", "docker", "gunicorn", "cloud", "render")
+        )
+    )
+}

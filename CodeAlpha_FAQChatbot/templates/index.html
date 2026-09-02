@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeAlpha FAQ Chatbot | AI & NLP Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar with Project Metadata and Quick Actions -->
+        <aside class="sidebar">
+            <div class="brand-header">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <div>
+                    <h2>CodeAlpha AI</h2>
+                    <span class="badge-sub">NLP FAQ Chatbot</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3><i class="fa-solid fa-sliders"></i> NLP Configuration</h3>
+                <div class="control-card">
+                    <div class="control-header">
+                        <label for="threshold-slider">Cosine Threshold</label>
+                        <span id="threshold-val" class="metric-tag">{{ "%.2f"|format(default_threshold) }}</span>
+                    </div>
+                    <input type="range" id="threshold-slider" min="0.05" max="0.80" step="0.01" value="{{ default_threshold }}">
+                    <p class="control-hint">Minimum score to accept matched answer vs triggering fallback.</p>
+                </div>
+
+                <div class="model-meta">
+                    <div class="meta-row">
+                        <span><i class="fa-solid fa-layer-group"></i> Vectorizer</span>
+                        <strong>TF-IDF (1,2-grams)</strong>
+                    </div>
+                    <div class="meta-row">
+                        <span><i class="fa-solid fa-calculator"></i> Metric</span>
+                        <strong>Cosine Similarity</strong>
+                    </div>
+                    <div class="meta-row">
+                        <span><i class="fa-solid fa-database"></i> Knowledge Base</span>
+                        <strong id="faq-count-badge">{{ total_faqs }} FAQs Loaded</strong>
+                    </div>
+                    <div class="meta-row">
+                        <span><i class="fa-solid fa-shield-halved"></i> API Mode</span>
+                        <strong class="green-text">100% Offline / Local</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3><i class="fa-solid fa-lightbulb"></i> Suggested Questions</h3>
+                <div class="sample-pills-vertical">
+                    {% for sample in sample_questions %}
+                    <button class="sample-pill-btn" onclick="sendSampleQuestion('{{ sample }}')">
+                        <i class="fa-regular fa-comment-dots"></i> {{ sample }}
+                    </button>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="btn-outline" onclick="openFaqModal()">
+                    <i class="fa-solid fa-book-open"></i> Browse FAQ Dataset
+                </button>
+                <div class="internship-tag">
+                    <i class="fa-solid fa-graduation-cap"></i> CodeAlpha AI Internship Project
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Window Area -->
+        <main class="chat-main">
+            <!-- Header Bar -->
+            <header class="chat-header">
+                <div class="chat-header-info">
+                    <div class="bot-avatar">
+                        <i class="fa-solid fa-robot"></i>
+                        <span class="online-indicator"></span>
+                    </div>
+                    <div>
+                        <h1>FAQ Assistant Engine</h1>
+                        <p class="status-subtitle">Powered by NLTK & Scikit-Learn TF-IDF Matching</p>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+                    <button class="icon-btn" title="View FAQ Dataset" onclick="openFaqModal()">
+                        <i class="fa-solid fa-database"></i>
+                    </button>
+                    <button class="icon-btn" title="Clear Conversation" onclick="clearChat()">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Chat Messages Log -->
+            <section class="messages-container" id="messages-container">
+                <!-- Welcome greeting bubble -->
+                <div class="message bot-message">
+                    <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+                    <div class="msg-content">
+                        <div class="msg-bubble">
+                            <p><strong>Hello! 👋 Welcome to CodeAlpha AI FAQ Assistant.</strong></p>
+                            <p>I can instantly answer questions regarding our platform, API integration, pricing, security, billing, and NLP architecture using <em>TF-IDF vector matching and Cosine Similarity</em>.</p>
+                            <div class="sample-chips-container">
+                                <span>Try asking:</span>
+                                <div class="chips-row">
+                                    <button class="quick-chip" onclick="sendSampleQuestion('How do I reset my password?')">Reset Password</button>
+                                    <button class="quick-chip" onclick="sendSampleQuestion('What are the API rate limits?')">API Rate Limits</button>
+                                    <button class="quick-chip" onclick="sendSampleQuestion('How does TF-IDF work in this chatbot?')">TF-IDF Math</button>
+                                    <button class="quick-chip" onclick="sendSampleQuestion('What pricing plans are available?')">Pricing Plans</button>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="msg-time" id="welcome-time">Just now</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Typing Indicator (Hidden by default) -->
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+                <div class="typing-bubble">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <span class="typing-text">Computing TF-IDF vector & cosine similarities...</span>
+            </div>
+
+            <!-- Input Bar -->
+            <footer class="chat-input-area">
+                <form id="chat-form" onsubmit="handleChatSubmit(event)">
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            id="user-input"
+                            placeholder="Type your question here (e.g. 'How do I generate API keys?')..."
+                            autocomplete="off"
+                            required
+                        >
+                        <button type="submit" id="send-btn" class="send-btn">
+                            <span>Send</span>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="input-footer-note">
+                    <span><i class="fa-solid fa-bolt"></i> Real-time local NLP vectorizer</span>
+                    <span>•</span>
+                    <span>No third-party API key required</span>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- FAQ Dataset Modal Drawer -->
+    <div class="modal-overlay" id="faq-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div>
+                    <h3><i class="fa-solid fa-book-bookmark"></i> FAQ Knowledge Dataset</h3>
+                    <p>All active questions vectorized in the TF-IDF matrix</p>
+                </div>
+                <button class="close-btn" onclick="closeFaqModal()">&times;</button>
+            </div>
+            <div class="modal-search">
+                <input type="text" id="modal-filter" placeholder="Search FAQ database..." oninput="filterFaqList()">
+            </div>
+            <div class="modal-body" id="faq-list-container">
+                <div class="loader-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Loading FAQs...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
