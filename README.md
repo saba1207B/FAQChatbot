@@ -1,183 +1,205 @@
-# CodeAlpha_FAQChatbot 🤖
-### AI & NLP-Powered FAQ Assistant Engine
-**CodeAlpha Artificial Intelligence Internship — Task 1 Submission**
+# CodeAlpha FAQ Chatbot 🤖
 
-![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-3.0.3-000000?style=for-the-badge&logo=flask&logoColor=white)
-![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.4.2-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
-![NLTK](https://img.shields.io/badge/NLTK-3.8.1-154f5b?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
+**CodeAlpha Artificial Intelligence Internship — Task 2: Chatbot for FAQs**
 
----
+A professional Android FAQ assistant built with Kotlin and Jetpack Compose, backed by a real local NLP pipeline using **text preprocessing, TF-IDF vectorization, and cosine similarity**. The repository also contains the Python reference implementation used to demonstrate the same NLP workflow.
 
-## 📌 Project Overview
-**CodeAlpha_FAQChatbot** is an intelligent, lightweight, and completely local Natural Language Processing (NLP) conversational agent. Designed specifically to automate customer and developer support for a cloud AI SaaS platform, this project demonstrates real computational text matching using **Term Frequency-Inverse Document Frequency (TF-IDF)** and **Cosine Similarity** without relying on paid or rate-limited third-party APIs.
+## ✨ Highlights
 
-Unlike basic if/else pattern matchers or regex bots, this system builds a sparse mathematical vector space representation of all frequently asked questions. When a user enters a query, the text undergoes multi-stage NLP cleaning, is mapped into the TF-IDF feature space, and evaluated via vector dot products to find the semantically closest answer.
+- Real FAQ matching — no rigid `if/else` question matching
+- Local NLP processing with no paid API or API key requirement
+- TF-IDF feature representation and cosine-similarity ranking
+- Configurable similarity threshold and graceful fallback
+- FAQ categories, search and suggestions
+- Conversation history and clear-chat support
+- Responsive modern Jetpack Compose interface
+- Python/Flask reference implementation included under `CodeAlpha_FAQChatbot/`
+- GitHub Actions workflow for automatic Android debug APK builds
 
----
+## 🎯 CodeAlpha Task Alignment
 
-## 🎯 CodeAlpha Internship Task Scope
-- **Domain:** Artificial Intelligence & Natural Language Processing (NLP)
-- **Objective:** Develop an end-to-end conversational FAQ system capable of tokenizing unstructured input, calculating similarity scores against a knowledge base, returning the highest-confidence match, and handling out-of-domain questions gracefully with configurable thresholds.
+This project implements **Task 2 — Chatbot for FAQs**. The application collects a structured FAQ knowledge base, preprocesses natural-language questions, compares a user's query with the FAQ corpus, and returns the closest answer when the similarity score reaches the configured threshold.
 
----
-
-## 🌟 Key Features
-- **📊 30+ Structured FAQ Knowledge Base:** Realistic dataset covering General Information, Authentication, API & SDK Integration, Rate Limits, Billing, Security & GDPR, and Troubleshooting.
-- **🧠 Real Mathematical NLP Matching:** Full end-to-end pipeline implementing lowercasing, punctuation stripping, tokenization, stopword filtering, unigram/bigram TF-IDF vectorization, and L2-normalized cosine similarity.
-- **⚙️ Configurable Similarity Threshold:** Interactive slider allowing dynamic adjustment of the matching threshold (default `0.22`) with real-time confidence badges.
-- **🛡️ Graceful Fallback & Smart Suggestions:** If a user query does not meet the confidence threshold, the bot returns an informative fallback response along with top nearest question suggestions.
-- **🎨 Glassmorphic Modern UI:** Dark-mode responsive interface with real-time typing indicators, message timestamps, conversation history clearing, and quick sample question pills.
-- **⚡ 100% Offline & Private:** Operates entirely locally with zero API keys or external server dependencies.
-
----
-
-## 🔬 AI & NLP Methodology
-
-### 1. NLP Preprocessing Pipeline
-Every input query and FAQ document undergoes standard NLP normalization:
-```
-Raw User Text ➡️ Lowercasing ➡️ URL & Punctuation Removal ➡️ Tokenization ➡️ Stopword Filtering ➡️ Lemmatization / Stemming ➡️ Clean Token Sequence
-```
-
-### 2. How TF-IDF Vectorization Works
-**TF-IDF** (Term Frequency-Inverse Document Frequency) quantifies word importance within a document relative to an entire corpus.
-
-$$\text{TF}(t, d) = \frac{f_{t, d}}{\sum_{t' \in d} f_{t', d}}$$
-
-$$\text{IDF}(t, D) = \ln\left(\frac{1 + |D|}{1 + |\{d \in D : t \in d\}|}\right) + 1$$
-
-$$\text{TF-IDF}(t, d, D) = \text{TF}(t, d) \times \text{IDF}(t, D)$$
-
-- **Term Frequency (TF):** Measures how frequently a word $t$ appears in document $d$.
-- **Inverse Document Frequency (IDF):** Penalizes ubiquitous terms (e.g. *what*, *how*, *is*) and assigns higher weights to informative keywords (e.g. *pricing*, *rate-limit*, *encryption*).
-
-### 3. How Cosine Similarity Works
-Cosine similarity computes the cosine of the angle between the query vector $\mathbf{q}$ and FAQ document vector $\mathbf{d}_i$:
-
-$$\text{Cosine Similarity}(\mathbf{q}, \mathbf{d}_i) = \frac{\mathbf{q} \cdot \mathbf{d}_i}{\|\mathbf{q}\|_2 \|\mathbf{d}_i\|_2} = \frac{\sum_{j=1}^{V} q_j d_{ij}}{\sqrt{\sum_{j=1}^V q_j^2} \sqrt{\sum_{j=1}^V d_{ij}^2}}$$
-
-- Scores range from **`0.0`** (completely orthogonal / zero overlap) to **`1.0`** (identical vector orientation).
-- If $\max_i(\text{Score}_i) \ge \text{Threshold}$, the corresponding answer is returned; otherwise, the fallback handler is triggered.
-
----
-
-## 🛠️ Technology Stack
-| Layer | Technologies |
+| Requirement | Implementation |
 |---|---|
-| **Programming Language** | Python 3.9+ |
-| **Backend Web Framework** | Flask 3.0.3, Jinja2, Werkzeug |
-| **Machine Learning & NLP** | scikit-learn (TfidfVectorizer, cosine_similarity), NLTK, NumPy |
-| **Frontend Interface** | HTML5, CSS3 (Glassmorphism & Flexbox), Modern JavaScript (ES6+ Fetch API) |
-| **Deployment & WSGI** | Gunicorn |
+| FAQ dataset | Local structured FAQ dataset |
+| NLP preprocessing | Tokenization, cleaning, stopword handling and n-gram extraction |
+| Similarity matching | TF-IDF + cosine similarity |
+| Best answer | Highest-scoring FAQ |
+| Unknown questions | Threshold-based fallback + suggestions |
+| User interface | Android Jetpack Compose |
+| External paid API | Not required |
 
----
+## 🧠 How It Works
 
-## 📁 Project Structure
+```text
+User Question
+     ↓
+Text Preprocessing
+     ↓
+Token / N-gram Extraction
+     ↓
+TF-IDF Vector Representation
+     ↓
+Cosine Similarity Against FAQ Corpus
+     ↓
+Highest Similarity Score
+     ↓
+Threshold Check
+   ↙       ↘
+Match     Fallback
+   ↓         ↓
+Answer    Suggestions
 ```
+
+### TF-IDF
+
+TF-IDF assigns greater weight to terms that are informative within the FAQ corpus and lower weight to terms that occur broadly across documents.
+
+### Cosine Similarity
+
+The query vector is compared with every FAQ vector. The FAQ with the highest similarity score is selected, provided it meets the configured threshold.
+
+## 📱 Android Application
+
+The Android application is implemented with:
+
+- Kotlin
+- Jetpack Compose
+- Material 3
+- AndroidX Lifecycle/ViewModel
+- Kotlin Coroutines
+- Local FAQ dataset
+- Local TF-IDF engine
+
+The main Android entry point is `app/src/main/java/com/example/MainActivity.kt`, with the chatbot state and matching workflow handled by `ChatViewModel`.
+
+## 🐍 Python Reference Implementation
+
+A complete Python/Flask version is retained in:
+
+```text
 CodeAlpha_FAQChatbot/
-├── app.py                     # Flask web server and REST API endpoints
-├── requirements.txt           # Python dependencies
-├── README.md                  # Comprehensive documentation and guide
-├── .gitignore                 # Git ignore configuration
+├── app.py
+├── requirements.txt
 ├── data/
-│   └── faqs.json              # 30+ structured FAQ knowledge dataset
 ├── src/
-│   ├── __init__.py            # Package initializer
-│   ├── preprocessing.py       # Tokenization, cleaning, stopword filtering
-│   └── chatbot.py             # TF-IDF & Cosine Similarity chatbot engine
 ├── templates/
-│   └── index.html             # Chatbot UI template
-├── static/
-│   ├── style.css              # Modern glassmorphism UI styles
-│   └── script.js              # Real-time chat client, fetch API, DOM handling
-└── screenshots/               # Demo screenshots for documentation
+└── static/
 ```
 
----
+It provides a browser-based demonstration of the same NLP concept and is useful for technical inspection and experimentation.
 
-## 🚀 Installation Instructions
+## 📁 Repository Structure
 
-### Prerequisites
-- Python 3.9 or higher installed on your system.
-- Git (optional, for cloning).
+```text
+CodeAlpha_FAQChatbot/
+├── app/                         # Android application module
+├── CodeAlpha_FAQChatbot/        # Python/Flask reference implementation
+├── public/                      # Project assets
+├── gradle/                      # Gradle configuration
+├── .github/
+│   └── workflows/
+│       └── build-apk.yml        # Automatic APK build
+├── build.gradle.kts
+├── settings.gradle.kts
+├── gradle.properties
+├── metadata.json
+└── README.md
+```
 
-### 1. Clone or Navigate to Project
+## 🚀 Build the Android App
+
+### Requirements
+
+- Android Studio or a compatible Gradle environment
+- JDK 17
+- Android SDK with the project's configured compile SDK
+
+### Local build
+
 ```bash
-cd CodeAlpha_FAQChatbot
+gradle :app:assembleDebug
 ```
 
-### 2. Create and Activate a Virtual Environment
-```bash
-# On Linux / macOS
-python3 -m venv venv
-source venv/bin/activate
+The APK is generated at:
 
-# On Windows
-python -m venv venv
-venv\Scripts\activate
+```text
+app/build/outputs/apk/debug/app-debug.apk
 ```
 
-### 3. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
+## ⚙️ GitHub Actions APK Build
 
----
+Every push to `main` and every manual workflow dispatch runs the Android build workflow.
 
-## 💻 How to Run the Chatbot
+The workflow:
 
-Start the Flask application server:
-```bash
-python app.py
-```
+1. Checks out the repository.
+2. Installs JDK 17.
+3. Installs Gradle 9.3.1.
+4. Creates an isolated CI debug keystore.
+5. Builds `:app:assembleDebug`.
+6. Publishes the APK as a GitHub Actions artifact.
 
-Open your browser and navigate to:
-```
-http://127.0.0.1:5000
-```
+No private signing key is stored in the repository.
 
----
+## 🧪 Testing Checklist
 
-## 🧪 Example Questions to Test
+- Launch the app.
+- Ask a known FAQ question.
+- Confirm that the most relevant FAQ answer is returned.
+- Try a differently worded question.
+- Adjust the similarity threshold.
+- Try an unrelated question and verify graceful fallback.
+- Open the FAQ explorer/search interface.
+- Clear the conversation and start again.
 
-| Category | Example Question | Expected Match |
-|---|---|---|
-| **Authentication** | *"How can I reset my forgotten password?"* | Password reset instructions |
-| **API & Quotas** | *"What is the rate limit for free tier accounts?"* | 60 RPM & 10,000 TPM limit details |
-| **Pricing** | *"What subscription tiers and pricing plans do you offer?"* | Developer, Pro & Enterprise tiers |
-| **NLP Math** | *"How does cosine similarity calculate vectors?"* | Mathematical angle formula explanation |
-| **Security** | *"Is customer data used to train AI models?"* | Zero data retention privacy policy |
-| **Fallback Test** | *"What is the recipe for chocolate chip cookies?"* | Graceful out-of-scope fallback & suggestions |
+## 📸 Screenshots
 
----
+Add final demonstration screenshots to a `screenshots/` directory when available. Recommended captures:
 
-## 📸 Screenshots & LinkedIn Demonstration Guide
+1. Main chatbot screen
+2. High-similarity FAQ response
+3. Threshold/fallback response
+4. FAQ browser/search interface
 
-### Suggested Screenshots for Submission / LinkedIn:
-1. **Hero View:** Clean UI with the sidebar configuration and initial welcome greeting.
-2. **High Similarity Query:** A technical question (e.g. *"What are the API rate limits?"*) showing the green **92% Similarity Match** badge and matched token metadata.
-3. **NLP Threshold Fallback:** An unrelated query showing the fallback response and suggested relevant topics.
-4. **Knowledge Base Modal:** The FAQ dataset explorer drawer displaying categorized cards.
+## 🎥 LinkedIn Demonstration
 
-### Recommended LinkedIn Post Caption:
-> 🚀 Excited to share my latest Artificial Intelligence project completed during my **CodeAlpha AI Internship**: **CodeAlpha_FAQChatbot**!
-> 
-> 🧠 Built a full-stack conversational NLP chatbot using **Python, Flask, NLTK, and scikit-learn**. Instead of rigid keyword rules, this bot transforms unstructured natural language into **TF-IDF sparse vector representations** and computes **Cosine Similarity** to instantly retrieve high-precision answers from a knowledge base.
-> 
-> Key features:
-> ✅ 30+ structured FAQ knowledge base
-> ✅ Real TF-IDF & Cosine Similarity mathematical matching
-> ✅ Configurable similarity threshold & graceful fallback
-> ✅ Glassmorphic responsive web interface
-> ✅ 100% offline & zero API key dependency
-> 
-> #ArtificialIntelligence #NLP #MachineLearning #Python #Flask #CodeAlpha #Internship #DataScience
+Recommended 60–90 second flow:
 
----
+1. Introduce the CodeAlpha Task 2 project.
+2. Show the Android chatbot interface.
+3. Ask a natural-language FAQ question.
+4. Show the similarity/confidence result and returned answer.
+5. Demonstrate an unrelated question and fallback.
+6. Briefly show the TF-IDF/cosine-similarity implementation.
+7. End with the GitHub repository link.
+
+## 🔐 Privacy & Dependencies
+
+The core FAQ matching workflow is local and does not require a paid translation/LLM API. No API key is needed for the NLP matching engine.
+
+## 📌 Limitations
+
+- Retrieval quality depends on the FAQ knowledge base.
+- TF-IDF is lexical rather than deep semantic understanding.
+- Questions containing concepts absent from the dataset may fall back even when a human would understand the intent.
+
+## 🔮 Future Improvements
+
+- Sentence-transformer semantic embeddings
+- Multilingual FAQ support
+- Voice input
+- Analytics for unanswered questions
+- Remote FAQ synchronization
+- Automated FAQ ingestion
 
 ## 👤 Author
-- **Intern:** AI/NLP Engineering Intern
-- **Program:** CodeAlpha Artificial Intelligence Internship
-- **Project:** CodeAlpha_FAQChatbot
+
+**Sabareesh**
+
+CodeAlpha Artificial Intelligence Internship — Task 2
+
+## 📄 License
+
+MIT License
