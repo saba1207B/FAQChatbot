@@ -1,4 +1,4 @@
-# CodeAlpha FAQ Chatbot 🤖
+# FAQ Chatbot 🤖
 
 > A modern AI-powered FAQ chatbot application built to demonstrate Natural Language Processing and intelligent question matching.
 
@@ -6,15 +6,14 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.10-purple.svg)](https://kotlinlang.org/)
 [![Jetpack%20Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-blue.svg)](https://developer.android.com/compose)
 [![NLP](https://img.shields.io/badge/AI-NLP-orange.svg)](https://en.wikipedia.org/wiki/Natural_language_processing)
-[![CodeAlpha](https://img.shields.io/badge/CodeAlpha-AI%20Internship-black.svg)](https://www.codealpha.tech/)
 
 ## 📱 Overview
 
-**CodeAlpha FAQ Chatbot** is a native Android application that allows users to ask questions in natural language and receive the most relevant answer from a structured FAQ knowledge base.
+**FAQ Chatbot** is a native Android application that allows users to ask questions in natural language and receive the most relevant answer from a structured FAQ knowledge base.
 
 The project demonstrates a practical Natural Language Processing workflow using **text preprocessing, TF-IDF vectorization, and cosine similarity** rather than relying on hardcoded question-and-answer rules or a paid AI API.
 
-This project was developed as part of the **CodeAlpha Artificial Intelligence Internship — Task 2: Chatbot for FAQs**.
+This project was developed as part of an **Artificial Intelligence Internship — Task 2: Chatbot for FAQs**.
 
 ## ✨ Features
 
@@ -88,9 +87,9 @@ The application converts the user's question and FAQ entries into numerical TF-I
 ## 🏗️ Project Structure
 
 ```text
-CodeAlpha_FAQChatbot/
+FAQChatbot/
 ├── app/                              # Native Android application
-├── CodeAlpha_FAQChatbot/             # Python/Flask reference implementation
+├── FAQChatbot/             # Python/Flask reference implementation
 ├── public/                           # Project assets
 ├── .github/
 │   └── workflows/
@@ -155,7 +154,7 @@ screenshots/
 
 A short demonstration can show:
 
-1. The CodeAlpha internship project introduction.
+1. The internship project introduction.
 2. The chatbot interface.
 3. A natural-language FAQ question.
 4. The matched answer.
@@ -165,7 +164,7 @@ A short demonstration can show:
 
 ## 🎯 Internship Project
 
-**Program:** CodeAlpha Artificial Intelligence Internship  
+**Program:** Artificial Intelligence Internship  
 **Task:** Task 2 — Chatbot for FAQs  
 **Project Type:** AI / Natural Language Processing  
 **Platform:** Android
