@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Sabareesh M (saba1207B). All Rights Reserved.
+// All rights reserved. No public license is granted.
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
   alias(libs.plugins.android.application) apply false

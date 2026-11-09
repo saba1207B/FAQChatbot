@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Sabareesh M (saba1207B). All Rights Reserved.
+// All rights reserved. No public license is granted.
+
 package com.example
 
 import org.junit.Assert.*
